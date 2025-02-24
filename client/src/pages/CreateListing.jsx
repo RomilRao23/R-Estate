@@ -7,7 +7,7 @@ export default function CreateListing() {
             Create a Listing
         </h1>
 
-        <form className='flex flex-col sm:felx-row'>
+        <form className='flex sm:flex-row gap-4'>
             
             <div className='flex flex-col gap-4 flex-1'>
                 <input 
@@ -94,10 +94,46 @@ export default function CreateListing() {
                              max='10'
                             required
                             className='p-3 border border-gray-300 rounded-lg'/>
-                        <p>Beds</p>
+                            <div className='flex flex-col items-center'>
+                            <p>Regular price</p>
+                            <span className='text-xs'>( Rs / month)</span>
+                            </div>
+                        
+                    </div>
+                    <div className='flex items-center gap-2'>
+                        <input type='number'
+                             id='discountPrice'
+                             min='1'
+                             max='10'
+                            required
+                            className='p-3 border border-gray-300 rounded-lg'/>
+                        <div className='flex flex-col items-center'>
+                            <p >Discounted price</p>
+                            <span className='text-xs'>( Rs / month)</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div className='flex flex-col gap-4 flex-1'>
+                <p className='font-semibold'>
+                    Images:
+                    <sapn className='font-normal text-gray-600 ml-2'>
+                        The first image will be the cover (max 6)
+                    </sapn>
+                </p>
+
+                <div className='flex gap-4'>
+                    <input className='p-3 border border-gray-300 rounded w-full' type='file' accept='image/*' multiple/>
+                    <button className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'>
+                        Upload
+                    </button>
+                </div>
+                <button className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
+                    Create Listing
+                </button>
+            </div>
+            
         </form>
     </main>
   )
