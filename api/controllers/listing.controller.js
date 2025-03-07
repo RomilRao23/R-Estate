@@ -18,7 +18,7 @@ export const deleteListing = async (req, res, next) => {
     }
 
     if(req.user.id!== listing.userRef){
-        return next(errorHandler(401, 'You are only allowed to delete you own listing'));
+        return next(errorHandler(401, 'You are only allowed to delete your own listing'));
     }
 
     try {
@@ -26,5 +26,29 @@ export const deleteListing = async (req, res, next) => {
        res.status(200).json('Listing has been deketed'); 
     } catch (error) {
         next(error);
+    }
+}
+
+export const updateListing = async (req, res, next) => {
+    const listing = await Listing.findById(req.params.id);
+
+    if(!listing){
+        return next(errorHandler(404, 'Listing not found'));
+    }
+
+    if(req.user.id!== listing.userRef){
+        return next(errorHandler(401, 'You are only allowed to update your own listing'));
+    }
+
+    try {
+        const updatedListing=await Listing.findByIdAndUpdate(
+            req.params.id,
+            req.bod,
+            {new:true}
+        )
+        res.status(200).json(updatedListing);
+    } catch (error) {
+        next(error);
+        
     }
 }
